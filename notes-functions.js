@@ -9,12 +9,12 @@ const getSavedNotes = () => {
 }
 
 // Save notes to localStorage
-const saveNotes = (notes) => {
+const saveNotes = notes => {
     localStorage.setItem('notes', JSON.stringify(notes))
 }
 
 // Remove a note from the list
-const removeNote = (id) => {
+const removeNote = id => {
     const noteIndex = notes.findIndex((note) => note.id === id)
 
     if (noteIndex > -1) {
@@ -23,7 +23,7 @@ const removeNote = (id) => {
 }
 
 // Generate the DOM structure for a note
-const generateNoteDOM = (note) => {
+const generateNoteDOM = note => {
     const noteEl = document.createElement('div')
     const textEl = document.createElement('a')
     const button = document.createElement('button')
@@ -86,15 +86,15 @@ const sortNotes = (notes, sortBy) => {
 // Render application notes
 const renderNotes = (notes, filters) => {
     notes = sortNotes(notes, filters.sortBy)
-    const filterNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
+    const filterNotes = notes.filter(note => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
 
     document.querySelector('#notes').innerHTML = ''
 
-    filterNotes.forEach((note) => {
+    filterNotes.forEach(note => {
         const noteEl = generateNoteDOM(note)
         document.querySelector('div').appendChild(noteEl)
     })
 }
 
 // Generate last edited message
-const generateLastEdited = (timestamp) => `Last edited ${moment(note.updatedAt).fromNow()}`
+const generateLastEdited = timestamp => `Last edited ${moment(note.updatedAt).fromNow()}`
